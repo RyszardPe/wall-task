@@ -2,6 +2,7 @@ package pl.ryspie.wallTask.blocks;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class CompositeBlock extends Block implements ICompositeBlock {
 
@@ -19,6 +20,12 @@ public class CompositeBlock extends Block implements ICompositeBlock {
     @Override
     public void addBlock(IBlock block) {
         nestedBlocks.add(block);
+    }
+
+    @Override
+    public Stream<IBlock> toBlocksStream() {
+        return Stream.concat(super.toBlocksStream(),
+                nestedBlocks.stream().flatMap(IBlock::toBlocksStream));
     }
 
     @Override

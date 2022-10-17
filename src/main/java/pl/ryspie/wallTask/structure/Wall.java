@@ -32,7 +32,8 @@ public class Wall implements Structure {
 
     @Override
     public int count() {
-        return 0;
+        return (int) blocksInWallStructure.stream()
+                .flatMap(iBlock -> iBlock.toBlocksStream()).count();
     }
 
     @Override

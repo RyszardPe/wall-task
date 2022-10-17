@@ -35,6 +35,8 @@ public class Main {
         structure.addBlockToWall(compositeBlock2);
         structure.addBlockToWall(block3);
         System.out.println(structure);
+        System.out.println("------------Count All Blocks in Structure-----------");
+        System.out.println(structure.count());
 
 
     }

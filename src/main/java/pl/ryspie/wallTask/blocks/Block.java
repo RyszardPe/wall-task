@@ -1,5 +1,7 @@
 package pl.ryspie.wallTask.blocks;
 
+import java.util.stream.Stream;
+
 public class Block implements IBlock {
 
     private final String color;
@@ -18,6 +20,11 @@ public class Block implements IBlock {
     @Override
     public String getMaterial() {
         return material;
+    }
+
+    @Override
+    public Stream<IBlock> toBlocksStream() {
+        return Stream.of(this);
     }
 
     @Override
