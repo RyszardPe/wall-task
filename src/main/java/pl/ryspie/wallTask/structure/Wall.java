@@ -5,6 +5,7 @@ import pl.ryspie.wallTask.blocks.IBlock;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,25 +25,29 @@ public class Wall implements Structure {
 
     @Override
     public Optional<IBlock> findBlockByColor(String color) {
-        return Optional.of(blocksInWallStructure.stream()
-                .flatMap(iBlock-> iBlock.toBlocksStream())
-                .filter(block -> color.equals(block.getColor()))
-                .findAny())
+        return Optional.of(filterBlocksBy(block -> color.equals(block.getColor()))
+                        .findAny())
                 .orElse(null);
     }
 
     @Override
     public List<IBlock> findBlocksByMaterial(String material) {
-        Stream<IBlock> filteredBlocksByMaterial = blocksInWallStructure.stream()
-                .flatMap(iBlock -> iBlock.toBlocksStream())
-                .filter(block -> material.equals(block.getMaterial()));
+        Stream<IBlock> filteredBlocksByMaterial = filterBlocksBy(block -> material.equals(block.getMaterial()));
         return filteredBlocksByMaterial.collect(Collectors.toList());
     }
 
     @Override
     public int count() {
-        return (int) blocksInWallStructure.stream()
-                .flatMap(iBlock -> iBlock.toBlocksStream()).count();
+        return (int) (getFlattenedIBlockStreamFromNestedStructure().count());
+    }
+
+    private Stream<IBlock> filterBlocksBy(Predicate<IBlock> givenPredicate) {
+        return getFlattenedIBlockStreamFromNestedStructure().filter(givenPredicate);
+    }
+
+    private Stream<IBlock> getFlattenedIBlockStreamFromNestedStructure() {
+        return blocksInWallStructure.stream()
+                .flatMap(IBlock::toBlocksStream);
     }
 
     @Override

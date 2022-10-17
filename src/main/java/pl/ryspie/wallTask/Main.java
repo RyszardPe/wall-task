@@ -47,7 +47,7 @@ public class Main {
         System.out.println(structure.findBlocksByMaterial("plastic"));
 
         System.out.println("------------Find Any Block by color -----------");
-        System.out.println(structure.findBlockByColor("green"));
+        System.out.println(structure.findBlockByColor("black"));
 
 
     }
