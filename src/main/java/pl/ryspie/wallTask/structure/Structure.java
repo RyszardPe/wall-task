@@ -3,7 +3,7 @@ package pl.ryspie.wallTask.structure;
 import java.util.List;
 import java.util.Optional;
 
-interface Structure {
+public interface Structure {
      // zwraca dowolny element o podanym kolorze
      Optional findBlockByColor(String color);
 
