@@ -12,12 +12,13 @@ public class CompositeBlock extends Block implements ICompositeBlock {
     }
 
     @Override
-    public List getBlocks() {
+    public List<IBlock> getBlocks() {
         return nestedBlocks;
     }
 
-    public void addBlocks(IBlock block1) {
-        nestedBlocks.add(block1);
+    @Override
+    public void addBlock(IBlock block) {
+        nestedBlocks.add(block);
     }
 
     @Override
