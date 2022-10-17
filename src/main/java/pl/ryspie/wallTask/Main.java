@@ -22,21 +22,32 @@ public class Main {
 
         System.out.println(block1);
         System.out.println(block2);
+        System.out.println();
         System.out.println("------------Show Composite Block-----------");
         System.out.println(compositeBlock);
         System.out.println(compositeBlock2);
+        System.out.println();
         System.out.println("------------Show only nested blocks-----------");
         System.out.println(compositeBlock.getBlocks());
         System.out.println(compositeBlock2.getBlocks());
+        System.out.println();
         System.out.println("------------Add block and Show Wall Structure-----------");
         structure.addBlockToWall(block1);
         structure.addBlockToWall(block2);
         structure.addBlockToWall(compositeBlock);
         structure.addBlockToWall(compositeBlock2);
         structure.addBlockToWall(block3);
+
         System.out.println(structure);
+        System.out.println();
         System.out.println("------------Count All Blocks in Structure-----------");
         System.out.println(structure.count());
+        System.out.println();
+        System.out.println("------------Find Blocks by material -----------");
+        System.out.println(structure.findBlocksByMaterial("plastic"));
+
+        System.out.println("------------Find Any Block by color -----------");
+        System.out.println(structure.findBlockByColor("green"));
 
 
     }

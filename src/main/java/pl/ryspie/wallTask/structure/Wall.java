@@ -5,6 +5,8 @@ import pl.ryspie.wallTask.blocks.IBlock;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Wall implements Structure {
 
@@ -21,13 +23,20 @@ public class Wall implements Structure {
     }
 
     @Override
-    public Optional findBlockByColor(String color) {
-        return Optional.empty();
+    public Optional<IBlock> findBlockByColor(String color) {
+        return Optional.of(blocksInWallStructure.stream()
+                .flatMap(iBlock-> iBlock.toBlocksStream())
+                .filter(block -> color.equals(block.getColor()))
+                .findAny())
+                .orElse(null);
     }
 
     @Override
-    public List findBlocksByMaterial(String material) {
-        return null;
+    public List<IBlock> findBlocksByMaterial(String material) {
+        Stream<IBlock> filteredBlocksByMaterial = blocksInWallStructure.stream()
+                .flatMap(iBlock -> iBlock.toBlocksStream())
+                .filter(block -> material.equals(block.getMaterial()));
+        return filteredBlocksByMaterial.collect(Collectors.toList());
     }
 
     @Override
